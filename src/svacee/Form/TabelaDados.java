@@ -62,6 +62,11 @@ public class TabelaDados extends javax.swing.JFrame {
         jLabel1.setText("TABELA DE DADOS");
 
         jButtonVoltarDados.setText("Voltar");
+        jButtonVoltarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarDadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,6 +111,12 @@ public class TabelaDados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarDadosActionPerformed
+        // TODO add your handling code here:
+        //new TelaPrincipal().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonVoltarDadosActionPerformed
 
     /**
      * @param args the command line arguments

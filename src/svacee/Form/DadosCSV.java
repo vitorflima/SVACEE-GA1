@@ -95,7 +95,8 @@ public class DadosCSV extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        new TabelaDados().setVisible(true);
+        //new TelaPrincipal().setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
