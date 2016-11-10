@@ -6,17 +6,26 @@
 
 package svacee.Form;
 
+import javax.swing.table.DefaultTableModel;
+import svacee.ctrl.ConsumoCtrl;
+import svacee.model.Consumo;
+
+
 /**
  *
  * @author ana
  */
 public class TabelaDados extends javax.swing.JFrame {
 
+    ConsumoCtrl consumo = new ConsumoCtrl();
+    Consumo c = new Consumo();
+    
     /**
      * Creates new form TabelaDados
      */
     public TabelaDados() {
         initComponents();
+        //exibirDadosTabela();
     }
 
     /**
@@ -33,6 +42,7 @@ public class TabelaDados extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButtonVoltarDados = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,14 +78,17 @@ public class TabelaDados extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Exibir Dados");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -85,14 +98,25 @@ public class TabelaDados extends javax.swing.JFrame {
                         .addGap(260, 260, 260)
                         .addComponent(jButtonVoltarDados)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonVoltarDados)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -117,6 +141,10 @@ public class TabelaDados extends javax.swing.JFrame {
         //new TelaPrincipal().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVoltarDadosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        exibirDadosTabela();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,8 +180,19 @@ public class TabelaDados extends javax.swing.JFrame {
             }
         });
     }
+    
+     public void exibirDadosTabela(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.getDataVector().removeAllElements();
+        
+        for(Consumo c:consumo.getListaDados()){
+            model.addRow(new Object[]{c.getDataHora(),c.getIdColeta(),c.getValor()});   
+            
+        } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonVoltarDados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

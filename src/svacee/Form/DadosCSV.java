@@ -5,6 +5,11 @@
  */
 package svacee.Form;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import svacee.ctrl.ConsumoCtrl;
+
 /**
  *
  * @author ana
@@ -18,6 +23,8 @@ public class DadosCSV extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    ConsumoCtrl consumoCtrl = new ConsumoCtrl();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +49,12 @@ public class DadosCSV extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(242, 242, 246));
         jLabel1.setFont(new java.awt.Font("UnBatang", 1, 20)); // NOI18N
         jLabel1.setText("SELECIONAR DADOS CSV");
+
+        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser1ActionPerformed(evt);
+            }
+        });
 
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +112,20 @@ public class DadosCSV extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+       
+      String url = jFileChooser1.getSelectedFile().getPath();
+      
+        try {
+            consumoCtrl.obterDadoCSV(url);
+        } catch (IOException ex) {
+            Logger.getLogger(DadosCSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      System.out.println(url);
+        
+        
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     /**
      * @param args the command line arguments
