@@ -21,42 +21,42 @@ import svacee.model.Consumo;
 public class ConsumoCtrl {
 
     private List<Consumo> listaDados = new ArrayList<>();
-    String[] linhas;
-    String[] colunas;
+
 
     public ConsumoCtrl() {
     }
 
-    public void obterDadoCSV(String caminho) throws FileNotFoundException, IOException {
+    public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException {
 
+        String[] colunas;
+    
         BufferedReader br = null;
-        FileReader fileReader = new FileReader(caminho);
+        //FileReader fileReader = new FileReader(caminho);
 
-        br = new BufferedReader(fileReader);
-        
-        Consumo consumo = new Consumo();
-        
+        br = new BufferedReader(new FileReader(caminho));
+
         String linha = "";
         
-        while((linha = br.readLine()) != null){
-            
-            linhas = linha.split(",");
-            
-            for(String v:linhas){
-                
-                colunas = v.split(";");
-                
+        getListaDados().clear();
+
+        while ((linha = br.readLine()) != null) {
+                Consumo consumo = new Consumo();
+
+                colunas = linha.split(",");
+
                 consumo.setDataHora(java.sql.Timestamp.valueOf(colunas[0]));
                 consumo.setIdColeta(colunas[1]);
                 consumo.setValor(Double.parseDouble(colunas[2]));
-                
-                getListaDados().add(consumo);
-            }
-            
-        }
 
+                getListaDados().add(consumo);
+          
+        }
+        return getListaDados();
     }
 
+    
+    
+    
     public List<Consumo> getListaDados() {
         return listaDados;
     }
@@ -65,21 +65,6 @@ public class ConsumoCtrl {
         this.listaDados = listaDados;
     }
 
-    public String[] getLinhas() {
-        return linhas;
-    }
+   
 
-    public void setLinhas(String[] linhas) {
-        this.linhas = linhas;
-    }
-
-    public String[] getColunas() {
-        return colunas;
-    }
-
-    public void setColunas(String[] colunas) {
-        this.colunas = colunas;
-    }
-    
-    
 }
