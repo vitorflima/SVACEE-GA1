@@ -6,9 +6,12 @@
 package svacee.Form;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.ParseException;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
 import svacee.ctrl.ConsumoCtrl;
+import svacee.model.Consumo;
 
 /**
  *
@@ -115,14 +118,21 @@ public class DadosCSV extends javax.swing.JFrame {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
        
-      String url = jFileChooser1.getSelectedFile().getPath();
-      
+      String path = jFileChooser1.getSelectedFile().getAbsolutePath();
         try {
-            consumoCtrl.obterDadoCSV(url);
-        } catch (IOException ex) {
-            Logger.getLogger(DadosCSV.class.getName()).log(Level.SEVERE, null, ex);
+            List<Consumo> l = consumoCtrl.obterDadoCSV(path);
+            
+            Iterator i = l.iterator();
+            while (i.hasNext()) {
+                Consumo c = (Consumo) i.next();
+                System.out.println(c.getDataHora().toString()+" "+c.getIdColeta()+" "+c.getValor());
+            }
+        } catch (IOException | ParseException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-      System.out.println(url);
+      
+      
+      System.out.println(path);
         
         
     }//GEN-LAST:event_jFileChooser1ActionPerformed

@@ -10,7 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import svacee.model.Consumo;
 
@@ -26,7 +29,7 @@ public class ConsumoCtrl {
     public ConsumoCtrl() {
     }
 
-    public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException {
+    public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
 
         String[] colunas;
     
@@ -44,6 +47,11 @@ public class ConsumoCtrl {
 
                 colunas = linha.split(",");
 
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                Date minhaData = df.parse(colunas[0]);
+                java.sql.Timestamp timestamp = new java.sql.Timestamp(minhaData.getTime());
+                
+                
                 consumo.setDataHora(java.sql.Timestamp.valueOf(colunas[0]));
                 consumo.setIdColeta(colunas[1]);
                 consumo.setValor(Double.parseDouble(colunas[2]));
