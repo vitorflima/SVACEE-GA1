@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svacee.Form;
+package svacee.form;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,6 +19,11 @@ import svacee.model.Consumo;
  */
 public class DadosCSV extends javax.swing.JFrame {
 
+
+    private ConsumoCtrl consumoCtrl;
+
+
+
     /**
      * Creates new form DadosCSV
      */
@@ -27,7 +32,6 @@ public class DadosCSV extends javax.swing.JFrame {
     }
 
     
-    ConsumoCtrl consumoCtrl = new ConsumoCtrl();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,7 +124,7 @@ public class DadosCSV extends javax.swing.JFrame {
        
       String path = jFileChooser1.getSelectedFile().getAbsolutePath();
         try {
-            List<Consumo> l = consumoCtrl.obterDadoCSV(path);
+            List<Consumo> l = getConsumoCtrl().obterDadoCSV(path);
             
             Iterator i = l.iterator();
             while (i.hasNext()) {
@@ -179,4 +183,18 @@ public class DadosCSV extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the consumoCtrl
+     */
+    public ConsumoCtrl getConsumoCtrl() {
+        return consumoCtrl;
+    }
+
+    /**
+     * @param consumoCtrl the consumoCtrl to set
+     */
+    public void setConsumoCtrl(ConsumoCtrl consumoCtrl) {
+        this.consumoCtrl = consumoCtrl;
+    }
 }

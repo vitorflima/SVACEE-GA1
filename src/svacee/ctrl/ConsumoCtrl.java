@@ -23,10 +23,11 @@ import svacee.model.Consumo;
  */
 public class ConsumoCtrl {
 
-    private List<Consumo> listaDados = new ArrayList<>();
+    private List<Consumo> listaDados;
 
 
     public ConsumoCtrl() {
+        listaDados = new ArrayList();
     }
 
     public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
@@ -40,7 +41,7 @@ public class ConsumoCtrl {
 
         String linha = "";
         
-        getListaDados().clear();
+        listaDados.clear();
 
         while ((linha = br.readLine()) != null) {
                 Consumo consumo = new Consumo();
@@ -56,10 +57,10 @@ public class ConsumoCtrl {
                 consumo.setIdColeta(colunas[1]);
                 consumo.setValor(Double.parseDouble(colunas[2]));
 
-                getListaDados().add(consumo);
+                listaDados.add(consumo);
           
         }
-        return getListaDados();
+        return listaDados;
     }
 
     

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svacee.Form;
+package svacee.form;
+
+import svacee.ctrl.ConsumoCtrl;
 
 /**
  *
@@ -14,11 +16,19 @@ package svacee.Form;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    ConsumoCtrl controle;
+    DadosCSV telaObterDadosCSV;
+    TabelaDados telaTabelaDados;
+    Grafico telaGrafico;
+    Sobre telaSobre;
+    
+    
     /**
      * Creates new form Menu
      */
     public TelaPrincipal() {
         initComponents();
+        controle = new ConsumoCtrl();
     }
 
     /**
@@ -218,12 +228,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        new DadosCSV().setVisible(true);
+        telaObterDadosCSV = new DadosCSV();
+        telaObterDadosCSV.setConsumoCtrl(controle);
+        telaObterDadosCSV.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        new TabelaDados().setVisible(true);
+        telaTabelaDados = new TabelaDados();
+        telaTabelaDados.setConsumoCtrl(controle);
+        telaTabelaDados.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -233,13 +247,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new DadosCSV().setVisible(true);
+        jMenuItem3ActionPerformed(evt);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new TabelaDados().setVisible(true);
+        jMenuItem5ActionPerformed(evt);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package svacee.form;
 
-package svacee.Form;
-
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import svacee.ctrl.ConsumoCtrl;
 import svacee.model.Consumo;
-
 
 /**
  *
@@ -17,9 +19,9 @@ import svacee.model.Consumo;
  */
 public class TabelaDados extends javax.swing.JFrame {
 
-    ConsumoCtrl consumo = new ConsumoCtrl();
+    private ConsumoCtrl consumoCtrl;
     Consumo c = new Consumo();
-    
+
     /**
      * Creates new form TabelaDados
      */
@@ -39,7 +41,7 @@ public class TabelaDados extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButtonVoltarDados = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -48,25 +50,32 @@ public class TabelaDados extends javax.swing.JFrame {
 
         jPanel1.setBackground(java.awt.Color.white);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Data e hora", "Id Coleta", "Valor Consumo KW/h"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
 
         jLabel1.setFont(new java.awt.Font("UnBatang", 1, 20)); // NOI18N
         jLabel1.setText("TABELA DE DADOS");
@@ -176,19 +185,36 @@ public class TabelaDados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TabelaDados().setVisible(true);
+                //new TabelaDados().setVisible(true);
             }
         });
     }
-    
-     public void exibirDadosTabela(){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+    public void exibirDadosTabela() {
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         model.getDataVector().removeAllElements();
+
         
-        for(Consumo c:consumo.getListaDados()){
-            model.addRow(new Object[]{c.getDataHora(),c.getIdColeta(),c.getValor()});   
-            
-        } 
+        
+        List<Consumo> listaDados = new ArrayList();
+        try {
+            listaDados = consumoCtrl.getListaDados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"ERRO" + JOptionPane.ERROR_MESSAGE);
+        }
+          if (!listaDados.isEmpty()) {
+            Iterator it = listaDados.iterator();
+            while (it.hasNext()) {
+                Consumo c = (Consumo) it.next();
+                model.addRow(new Object[]{c.getDataHora(),c.getIdColeta(),c.getValor()});  
+
+            }
+        }
+
+        for (Consumo c : getConsumoCtrl().getListaDados()) {
+            model.addRow(new Object[]{c.getDataHora(), c.getIdColeta(), c.getValor()});
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -197,6 +223,20 @@ public class TabelaDados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the consumoCtrl
+     */
+    public ConsumoCtrl getConsumoCtrl() {
+        return consumoCtrl;
+    }
+
+    /**
+     * @param consumoCtrl the consumoCtrl to set
+     */
+    public void setConsumoCtrl(ConsumoCtrl consumoCtrl) {
+        this.consumoCtrl = consumoCtrl;
+    }
 }
