@@ -223,7 +223,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new Grafico().setVisible(true);
+        telaGrafico = new Grafico();
+        telaGrafico.setConsumoCtrl(controle);
+        telaGrafico.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -237,7 +239,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         telaTabelaDados = new TabelaDados();
         telaTabelaDados.setConsumoCtrl(controle);
+        telaTabelaDados.exibirDadosTabela();
         telaTabelaDados.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -258,7 +262,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new Grafico().setVisible(true);
+        jMenuItem6ActionPerformed(evt);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

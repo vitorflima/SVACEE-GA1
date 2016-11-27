@@ -6,12 +6,20 @@
 
 package svacee.form;
 
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import svacee.ctrl.ConsumoCtrl;
+
 /**
  *
  * @author ana
  */
 public class Grafico extends javax.swing.JFrame {
 
+    
+    private ConsumoCtrl consumoCtrl;
+    
+    
     /**
      * Creates new form Grafico
      */
@@ -37,6 +45,7 @@ public class Grafico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -73,6 +82,17 @@ public class Grafico extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 359, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 222, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -84,15 +104,20 @@ public class Grafico extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(253, 253, 253)
-                        .addComponent(jButton1)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(60, 60, 60))
         );
@@ -162,5 +187,33 @@ public class Grafico extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+
+
+private CategoryDataset createDataset() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1000.0, "01/2012", "Mês/Ano");
+        dataset.addValue(1750.0, "02/2012", "Mês/Ano");
+        dataset.addValue(1500.0, "03/2012", "Mês/Ano");
+        return dataset;
+    }
+
+
+
+/**
+     * @return the consumoCtrl
+     */
+    public ConsumoCtrl getConsumoCtrl() {
+        return consumoCtrl;
+    }
+
+    /**
+     * @param consumoCtrl the consumoCtrl to set
+     */
+    public void setConsumoCtrl(ConsumoCtrl consumoCtrl) {
+        this.consumoCtrl = consumoCtrl;
+    }
+
 }

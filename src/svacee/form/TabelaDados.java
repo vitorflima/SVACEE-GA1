@@ -27,7 +27,8 @@ public class TabelaDados extends javax.swing.JFrame {
      */
     public TabelaDados() {
         initComponents();
-        //exibirDadosTabela();
+        
+        
     }
 
     /**
@@ -186,6 +187,7 @@ public class TabelaDados extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new TabelaDados().setVisible(true);
+                
             }
         });
     }
