@@ -225,6 +225,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         telaGrafico = new Grafico();
         telaGrafico.setConsumoCtrl(controle);
+        telaGrafico.criaGrafico();
         telaGrafico.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 

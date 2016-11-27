@@ -3,12 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package svacee.form;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import svacee.ctrl.ConsumoCtrl;
+import svacee.model.Consumo;
 
 /**
  *
@@ -16,10 +25,8 @@ import svacee.ctrl.ConsumoCtrl;
  */
 public class Grafico extends javax.swing.JFrame {
 
-    
     private ConsumoCtrl consumoCtrl;
-    
-    
+
     /**
      * Creates new form Grafico
      */
@@ -43,7 +50,6 @@ public class Grafico extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
@@ -72,9 +78,6 @@ public class Grafico extends javax.swing.JFrame {
 
         jPanel1.setBackground(java.awt.Color.white);
 
-        jLabel1.setFont(new java.awt.Font("UnBatang", 1, 20)); // NOI18N
-        jLabel1.setText("GRÁFICO DE CONSUMO");
-
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,11 +89,11 @@ public class Grafico extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 222, Short.MAX_VALUE)
+            .addGap(0, 337, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -100,26 +103,22 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(253, 253, 253)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(0, 270, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(60, 60, 60))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,7 +179,6 @@ public class Grafico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
@@ -190,19 +188,65 @@ public class Grafico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-
-
-private CategoryDataset createDataset() {
+    private CategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(1000.0, "01/2012", "Mês/Ano");
-        dataset.addValue(1750.0, "02/2012", "Mês/Ano");
-        dataset.addValue(1500.0, "03/2012", "Mês/Ano");
+       
+
+        List<Consumo> listaDados = new ArrayList();
+        try {
+            listaDados = consumoCtrl.getListaDados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO" + JOptionPane.ERROR_MESSAGE);
+        }
+        if (!listaDados.isEmpty()) {
+            Iterator it = listaDados.iterator();
+            while (it.hasNext()) {
+                dataset = new DefaultCategoryDataset();
+                Consumo c = (Consumo) it.next();
+                dataset.addValue(c.getValor(), c.getDataHora(), c.getIdColeta());
+                
+
+            }
+        }
+       
         return dataset;
     }
+    
+    public void criaGrafico() {
+        
+         CategoryDataset cds = createDataset();
+        
+        String titulo = "Gráfico de Teste";
+        
+        String eixoy = "Valores";
+        
+        String txt_legenda = "Ledenda:";
+        
+        boolean legenda = true;
+        
+        boolean tooltips = true;
+        
+        boolean urls = true;
+        
+        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
+        
+        ChartPanel myChartPanel = new ChartPanel(graf, true);
+        
+        myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
+        
+        myChartPanel.setVisible(true);
+        
+        jPanel2.removeAll();
+     
+        jPanel2.add(myChartPanel);
 
+        jPanel2.revalidate();
+        
+        jPanel2.repaint();
+        
+    }
 
-
-/**
+    /**
      * @return the consumoCtrl
      */
     public ConsumoCtrl getConsumoCtrl() {
