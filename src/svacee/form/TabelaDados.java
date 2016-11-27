@@ -211,10 +211,10 @@ public class TabelaDados extends javax.swing.JFrame {
             }
         }
 
-        for (Consumo c : getConsumoCtrl().getListaDados()) {
-            model.addRow(new Object[]{c.getDataHora(), c.getIdColeta(), c.getValor()});
-
-        }
+//        for (Consumo c : getConsumoCtrl().getListaDados()) {
+//            model.addRow(new Object[]{c.getDataHora(), c.getIdColeta(), c.getValor()});
+//
+//        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
