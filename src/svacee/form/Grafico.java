@@ -10,12 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 import svacee.ctrl.ConsumoCtrl;
 import svacee.model.Consumo;
 
@@ -188,63 +182,7 @@ public class Grafico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    private CategoryDataset createDataset() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-       
-
-        List<Consumo> listaDados = new ArrayList();
-        try {
-            listaDados = consumoCtrl.getListaDados();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRO" + JOptionPane.ERROR_MESSAGE);
-        }
-        if (!listaDados.isEmpty()) {
-            Iterator it = listaDados.iterator();
-            while (it.hasNext()) {
-                dataset = new DefaultCategoryDataset();
-                Consumo c = (Consumo) it.next();
-                dataset.addValue(c.getValor(), c.getDataHora(), c.getIdColeta());
-                
-
-            }
-        }
-       
-        return dataset;
-    }
-    
-    public void criaGrafico() {
-        
-         CategoryDataset cds = createDataset();
-        
-        String titulo = "Gráfico de Teste";
-        
-        String eixoy = "Valores";
-        
-        String txt_legenda = "Ledenda:";
-        
-        boolean legenda = true;
-        
-        boolean tooltips = true;
-        
-        boolean urls = true;
-        
-        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
-        
-        ChartPanel myChartPanel = new ChartPanel(graf, true);
-        
-        myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
-        
-        myChartPanel.setVisible(true);
-        
-        jPanel2.removeAll();
-     
-        jPanel2.add(myChartPanel);
-
-        jPanel2.revalidate();
-        
-        jPanel2.repaint();
-        
-    }
+   
 
     /**
      * @return the consumoCtrl
