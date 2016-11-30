@@ -5,32 +5,20 @@
  */
 package svacee.form;
 
-import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
+
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
+
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-//import org.jfree.chart.ChartFactory;
-//import org.jfree.chart.ChartPanel;
-//import org.jfree.chart.JFreeChart;
-//import org.jfree.chart.plot.PlotOrientation;
-//import org.jfree.data.category.CategoryDataset;
-//import org.jfree.data.category.DefaultCategoryDataset;
+
 import svacee.ctrl.ConsumoCtrl;
 import svacee.model.Consumo;
 
@@ -48,12 +36,61 @@ public class Grafico extends javax.swing.JFrame {
     public Grafico() {
 
         initComponents();
-//        JPanel painel = createChartPanel();
-//        add(painel, BorderLayout.CENTER);
+        //JPanel painel = createChartPanel();
+        
+
+
+        setSize(640, 480);
+        setDefaultCloseOperation(jFrame1.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+//        
+//        myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
+//        
+//        myChartPanel.setVisible(true);
+//        
+//        jPanel2.removeAll();
+//     
+//        jPanel2.add(myChartPanel);
 //
-//        setSize(640, 480);
-//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        setLocationRelativeTo(null);
+//        jPanel2.revalidate();
+//        
+//        jPanel2.repaint();
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TabelaDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TabelaDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TabelaDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TabelaDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                //new TabelaDados().setVisible(true);
+
+            }
+        });
     }
 
     /**
@@ -228,8 +265,6 @@ public class Grafico extends javax.swing.JFrame {
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         plot.setRenderer(renderer);
 
-        
-
         return new ChartPanel(chart);
     }
 
@@ -271,30 +306,23 @@ public class Grafico extends javax.swing.JFrame {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH.mm");
 
-//        List<Consumo> listaDados = new ArrayList();
-//        try {
-//            listaDados = consumoCtrl.getListaDados();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "ERRO" + JOptionPane.ERROR_MESSAGE);
-//        }
-        if (!consumoCtrl.getListaDados().isEmpty()) {
-            Iterator it = consumoCtrl.getListaDados().iterator();
-            for (Consumo c : getConsumoCtrl().getListaDados()) {
-
-                if (c.getIdColeta().equals("ROBÔ 1")) {
-                    Robo1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
-                } else if (c.getIdColeta().equals("SERRA 1")) {
-                    Serra1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
-                } else if (c.getIdColeta().equals("ESTEIRA 1")) {
-                    Esteira1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
-                }
+        for (Consumo c : consumoCtrl.getListaDados()) {
+            System.out.println(c.getDataHora().toString() + " " + c.getIdColeta() + " " + c.getValor());
+            if (c.getIdColeta().equalsIgnoreCase("ROBÔ 1")) {
+                Robo1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+                System.out.println(Robo1.toString());
             }
-
-            dataset.addSeries(Robo1);
-            dataset.addSeries(Serra1);
-            dataset.addSeries(Esteira1);
-
+            if (c.getIdColeta().equalsIgnoreCase("SERRA 1")) {
+                Serra1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+            }
+            if (c.getIdColeta().equalsIgnoreCase("ESTEIRA 1")) {
+                Esteira1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+            }
         }
+
+        dataset.addSeries(Robo1);
+        dataset.addSeries(Serra1);
+        dataset.addSeries(Esteira1);
 
         return dataset;
 
