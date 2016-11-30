@@ -37,12 +37,12 @@ public class Grafico extends javax.swing.JFrame {
 
         initComponents();
         //JPanel painel = createChartPanel();
-        
-
-
-        setSize(640, 480);
-        setDefaultCloseOperation(jFrame1.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+//        
+//
+//
+//        setSize(640, 480);
+//        setDefaultCloseOperation(jFrame1.DISPOSE_ON_CLOSE);
+//        setLocationRelativeTo(null);
 //        
 //        myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
 //        
