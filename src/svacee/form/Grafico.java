@@ -5,11 +5,32 @@
  */
 package svacee.form;
 
+import java.awt.BorderLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartPanel;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.plot.PlotOrientation;
+//import org.jfree.data.category.CategoryDataset;
+//import org.jfree.data.category.DefaultCategoryDataset;
 import svacee.ctrl.ConsumoCtrl;
 import svacee.model.Consumo;
 
@@ -25,7 +46,14 @@ public class Grafico extends javax.swing.JFrame {
      * Creates new form Grafico
      */
     public Grafico() {
+
         initComponents();
+//        JPanel painel = createChartPanel();
+//        add(painel, BorderLayout.CENTER);
+//
+//        setSize(640, 480);
+//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        setLocationRelativeTo(null);
     }
 
     /**
@@ -44,7 +72,6 @@ public class Grafico extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jMenuItem2.setText("jMenuItem2");
@@ -72,18 +99,11 @@ public class Grafico extends javax.swing.JFrame {
 
         jPanel1.setBackground(java.awt.Color.white);
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 558, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,14 +115,8 @@ public class Grafico extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jButton1)
-                        .addGap(0, 270, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,9 +124,7 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26))
+                .addGap(61, 61, 61))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,49 +141,11 @@ public class Grafico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //new TelaPrincipal().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Grafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Grafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Grafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Grafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Grafico().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -182,7 +156,149 @@ public class Grafico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-   
+//    private CategoryDataset createDataset() {
+//        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//       
+//
+//        List<Consumo> listaDados = new ArrayList();
+//        try {
+//            listaDados = consumoCtrl.getListaDados();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "ERRO" + JOptionPane.ERROR_MESSAGE);
+//        }
+//        if (!listaDados.isEmpty()) {
+//            Iterator it = listaDados.iterator();
+//            while (it.hasNext()) {
+//                dataset = new DefaultCategoryDataset();
+//                Consumo c = (Consumo) it.next();
+//                dataset.addValue(c.getValor(), c.getDataHora(), c.getIdColeta());
+//                
+//
+//            }
+//        }
+//       
+//        return dataset;
+//    }
+//    
+//    public void criaGrafico() {
+//        
+//         CategoryDataset cds = createDataset();
+//        
+//        String titulo = "Gráfico de Teste";
+//        
+//        String eixoy = "Valores";
+//        
+//        String txt_legenda = "Ledenda:";
+//        
+//        boolean legenda = true;
+//        
+//        boolean tooltips = true;
+//        
+//        boolean urls = true;
+//        
+//        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
+//        
+//        ChartPanel myChartPanel = new ChartPanel(graf, true);
+//        
+//        myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
+//        
+//        myChartPanel.setVisible(true);
+//        
+//        jPanel2.removeAll();
+//     
+//        jPanel2.add(myChartPanel);
+//
+//        jPanel2.revalidate();
+//        
+//        jPanel2.repaint();
+//        
+//    }
+    public JPanel createChartPanel() {
+
+        String chartTitle = "Gráfico de Consumo";
+        String xAxisLabel = "Hora";
+        String yAxisLabel = "Kw/h";
+
+        XYDataset dataset = createDataset();
+
+        JFreeChart chart = ChartFactory.createXYLineChart(chartTitle,
+                xAxisLabel, yAxisLabel, dataset);
+
+        XYPlot plot = chart.getXYPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        plot.setRenderer(renderer);
+
+        
+
+        return new ChartPanel(chart);
+    }
+
+//    private XYDataset createDataset() {
+//        XYSeriesCollection dataset = new XYSeriesCollection();
+//        XYSeries series1 = new XYSeries("Object 1");
+//        XYSeries series2 = new XYSeries("Object 2");
+//        XYSeries series3 = new XYSeries("Object 3");
+//
+//        series1.add(1.0, 2.0);
+//        series1.add(2.0, 3.0);
+//        series1.add(3.0, 2.5);
+//        series1.add(3.5, 2.8);
+//        series1.add(4.2, 6.0);
+//
+//        series2.add(2.0, 1.0);
+//        series2.add(2.5, 2.4);
+//        series2.add(3.2, 1.2);
+//        series2.add(3.9, 2.8);
+//        series2.add(4.6, 3.0);
+//
+//        series3.add(1.2, 4.0);
+//        series3.add(2.5, 4.4);
+//        series3.add(3.8, 4.2);
+//        series3.add(4.3, 3.8);
+//        series3.add(4.5, 4.0);
+//
+//        dataset.addSeries(series1);
+//        dataset.addSeries(series2);
+//        dataset.addSeries(series3);
+//
+//        return dataset;
+//    }
+    private XYDataset createDataset() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries Robo1 = new XYSeries("Robo 1");
+        XYSeries Serra1 = new XYSeries("Serra  1");
+        XYSeries Esteira1 = new XYSeries("Esteira  1");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH.mm");
+
+//        List<Consumo> listaDados = new ArrayList();
+//        try {
+//            listaDados = consumoCtrl.getListaDados();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "ERRO" + JOptionPane.ERROR_MESSAGE);
+//        }
+        if (!consumoCtrl.getListaDados().isEmpty()) {
+            Iterator it = consumoCtrl.getListaDados().iterator();
+            for (Consumo c : getConsumoCtrl().getListaDados()) {
+
+                if (c.getIdColeta().equals("ROBÔ 1")) {
+                    Robo1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+                } else if (c.getIdColeta().equals("SERRA 1")) {
+                    Serra1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+                } else if (c.getIdColeta().equals("ESTEIRA 1")) {
+                    Esteira1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+                }
+            }
+
+            dataset.addSeries(Robo1);
+            dataset.addSeries(Serra1);
+            dataset.addSeries(Esteira1);
+
+        }
+
+        return dataset;
+
+    }
 
     /**
      * @return the consumoCtrl
@@ -195,7 +311,8 @@ public class Grafico extends javax.swing.JFrame {
      * @param consumoCtrl the consumoCtrl to set
      */
     public void setConsumoCtrl(ConsumoCtrl consumoCtrl) {
+        System.out.println("oi");
         this.consumoCtrl = consumoCtrl;
-    }
 
+    }
 }
