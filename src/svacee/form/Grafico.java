@@ -298,7 +298,40 @@ public class Grafico extends javax.swing.JFrame {
 //
 //        return dataset;
 //    }
-    private XYDataset createDataset() {
+    
+    
+//    private XYDataset createDataset() {
+//        XYSeriesCollection dataset = new XYSeriesCollection();
+//        XYSeries Robo1 = new XYSeries("Robo 1");
+//        XYSeries Serra1 = new XYSeries("Serra  1");
+//        XYSeries Esteira1 = new XYSeries("Esteira  1");
+//
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH.mm");
+//
+//        for (Consumo c : consumoCtrl.getListaDados()) {
+//            System.out.println(c.getDataHora().toString() + " " + c.getIdColeta() + " " + c.getValor());
+//            if (c.getIdColeta().equalsIgnoreCase("ROBÔ 1")) {
+//                Robo1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+//                System.out.println(Robo1.toString());
+//            }
+//            if (c.getIdColeta().equalsIgnoreCase("SERRA 1")) {
+//                Serra1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+//            }
+//            if (c.getIdColeta().equalsIgnoreCase("ESTEIRA 1")) {
+//                Esteira1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
+//            }
+//        }
+//
+//        dataset.addSeries(Robo1);
+//        dataset.addSeries(Serra1);
+//        dataset.addSeries(Esteira1);
+//
+//        return dataset;
+//
+//    }
+
+    
+     private XYDataset createDataset() {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries Robo1 = new XYSeries("Robo 1");
         XYSeries Serra1 = new XYSeries("Serra  1");
@@ -308,17 +341,18 @@ public class Grafico extends javax.swing.JFrame {
 
         for (Consumo c : consumoCtrl.getListaDados()) {
             System.out.println(c.getDataHora().toString() + " " + c.getIdColeta() + " " + c.getValor());
-            if (c.getIdColeta().equalsIgnoreCase("ROBÔ 1")) {
+            if (c.getIdColeta().equalsIgnoreCase(" ROBÔ 1")) {
                 Robo1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
                 System.out.println(Robo1.toString());
             }
-            if (c.getIdColeta().equalsIgnoreCase("SERRA 1")) {
+            if (c.getIdColeta().equalsIgnoreCase(" SERRA 1")) {
                 Serra1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
             }
-            if (c.getIdColeta().equalsIgnoreCase("ESTEIRA 1")) {
+            if (c.getIdColeta().equalsIgnoreCase(" ESTEIRA 1")) {
                 Esteira1.add(Double.parseDouble(simpleDateFormat.format(c.getDataHora())), c.getValor());
             }
         }
+
 
         dataset.addSeries(Robo1);
         dataset.addSeries(Serra1);
@@ -327,7 +361,9 @@ public class Grafico extends javax.swing.JFrame {
         return dataset;
 
     }
-
+     
+     
+     
     /**
      * @return the consumoCtrl
      */

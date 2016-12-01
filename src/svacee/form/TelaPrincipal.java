@@ -5,6 +5,9 @@
  */
 package svacee.form;
 
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import svacee.ctrl.ConsumoCtrl;
 
 /**
@@ -223,11 +226,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        telaGrafico = new Grafico();
-        telaGrafico.setConsumoCtrl(controle);
-        
-        telaGrafico.createChartPanel();
-        telaGrafico.setVisible(true);
+         telaGrafico = new Grafico();
+       telaGrafico.setConsumoCtrl(controle);
+       
+       JPanel chartPanel = telaGrafico.createChartPanel();
+       //add(chartPanel, BorderLayout.CENTER);
+       
+       
+       JFrame j = new JFrame();
+       j.setSize(640, 480);
+       j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       j.setLocationRelativeTo(null);
+       j.add(chartPanel);
+       
+       j.setVisible(true);
        
         
     }//GEN-LAST:event_jMenuItem6ActionPerformed
