@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import svacee.form.DadosCSV;
 import svacee.model.Consumo;
 
 /**
@@ -29,7 +30,7 @@ public class ConsumoCtrl {
     public ConsumoCtrl() {
         listaDados = new ArrayList();
     }
-
+    
     public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
 
         String[] colunas;
@@ -60,7 +61,10 @@ public class ConsumoCtrl {
                 listaDados.add(consumo);
           
         }
+        
+        
         return listaDados;
+        
     }
 
     

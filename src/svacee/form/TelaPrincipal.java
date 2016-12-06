@@ -235,7 +235,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
        
        JFrame j = new JFrame();
        j.setSize(640, 480);
-       j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        j.setLocationRelativeTo(null);
        j.add(chartPanel);
        
