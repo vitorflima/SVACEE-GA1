@@ -61,7 +61,7 @@ public class ConsumoCtrl {
                 listaDados.add(consumo);
           
         }
-        
+
         
         return listaDados;
         
