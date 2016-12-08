@@ -25,51 +25,50 @@ import svacee.model.Consumo;
 public class ConsumoCtrl {
 
     private List<Consumo> listaDados;
-
+    private List<String> listaIdColetaDados;
+    private List<Consumo> listaGerarGrafico;
 
     public ConsumoCtrl() {
         listaDados = new ArrayList();
+        listaIdColetaDados = new ArrayList<>();
+        listaGerarGrafico = new ArrayList<>();
+
     }
-    
+
     public List<Consumo> obterDadoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
 
         String[] colunas;
-    
+
         BufferedReader br = null;
         //FileReader fileReader = new FileReader(caminho);
 
         br = new BufferedReader(new FileReader(caminho));
 
         String linha = "";
-        
+
         listaDados.clear();
 
         while ((linha = br.readLine()) != null) {
-                Consumo consumo = new Consumo();
+            Consumo consumo = new Consumo();
 
-                colunas = linha.split(",");
+            colunas = linha.split(",");
 
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-                Date minhaData = df.parse(colunas[0]);
-                java.sql.Timestamp timestamp = new java.sql.Timestamp(minhaData.getTime());
-                
-                
-                consumo.setDataHora(java.sql.Timestamp.valueOf(colunas[0]));
-                consumo.setIdColeta(colunas[1]);
-                consumo.setValor(Double.parseDouble(colunas[2]));
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            Date minhaData = df.parse(colunas[0]);
+            java.sql.Timestamp timestamp = new java.sql.Timestamp(minhaData.getTime());
 
-                listaDados.add(consumo);
-          
+            consumo.setDataHora(java.sql.Timestamp.valueOf(colunas[0]));
+            consumo.setIdColeta(colunas[1]);
+            consumo.setValor(Double.parseDouble(colunas[2]));
+
+            listaDados.add(consumo);
+
         }
 
-        
         return listaDados;
-        
+
     }
 
-    
-    
-    
     public List<Consumo> getListaDados() {
         return listaDados;
     }
@@ -77,7 +76,5 @@ public class ConsumoCtrl {
     public void setListaDados(List<Consumo> listaDados) {
         this.listaDados = listaDados;
     }
-
-   
 
 }
